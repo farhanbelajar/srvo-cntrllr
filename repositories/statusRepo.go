@@ -5,6 +5,13 @@ import (
 	"srvo-cntrllr/entities"
 )
 
+func InitProj(db *sql.DB, status entities.Status) (err error) {
+	sql := "INSERT INTO status(id, srv_status) values(1, 0)"
+
+	_, err = db.Exec(sql, status.Id, status.SrvStatus)
+	return err
+}
+
 func GetStatus(db *sql.DB) (result []entities.Status, err error) {
 	sql := "SELECT * FROM status"
 

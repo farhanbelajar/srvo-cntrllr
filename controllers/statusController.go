@@ -10,6 +10,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func InitProj(c *gin.Context) {
+	var id entities.Status
+
+	err := repositories.InitProj(database.DbConnection, id)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, id)
+}
+
 func GetStatus(c *gin.Context) {
 	var result gin.H
 
