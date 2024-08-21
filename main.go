@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
 	"srvo-cntrllr/database"
 	"srvo-cntrllr/routers"
 
@@ -16,21 +17,23 @@ import (
 // go get -u "github.com/rubenv/sql-migrate"
 // go get -u "github.com/joho/godotenv"
 
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "postgres"
-	password = "liatdibawahlaptop"
-	dbName   = "praktikum_mcs_bab7"
-)
+// const (
+// 	host     = "localhost"
+// 	port     = 5432
+// 	user     = "postgres"
+// 	password = "FARHAN"
+// 	dbName   = "praktikum_mcs_bab7"
+// )
 
 func main() {
 	var PORT = ":8080"
 
-	psqlInfo := fmt.Sprintf(
-		`host=%s port=%d user=%s password=%s dbname=%s sslmode=disable`,
-		host, port, user, password, dbName,
-	)
+	// psqlInfo := fmt.Sprintf(
+	// 	`host=%s port=%d user=%s password=%s dbname=%s sslmode=disable`,
+	// 	host, port, user, password, dbName,
+	// )
+
+	psqlInfo := os.Getenv("DATABASE_URL")
 
 	DB, err := sql.Open("postgres", psqlInfo)
 
