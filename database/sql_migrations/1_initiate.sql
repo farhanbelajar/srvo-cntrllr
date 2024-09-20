@@ -2,7 +2,7 @@
 -- +migrate StatementBegin
 
 CREATE TABLE status (
-    id INTEGER,
+    id INTEGER PRIMARY KEY,
     srv_status INTEGER
 );
 
