@@ -8,22 +8,9 @@ import (
 	"srvo-cntrllr/database"
 	"srvo-cntrllr/routers"
 
+	"github.com/gin-contrib/cors"
 	_ "github.com/lib/pq"
 )
-
-// input
-// go get -u "github.com/gin-gonic/gin"
-// go get -u "github.com/lib/pq"
-// go get -u "github.com/rubenv/sql-migrate"
-// go get -u "github.com/joho/godotenv"
-
-// const (
-// 	host     = "localhost"
-// 	port     = 5432
-// 	user     = "postgres"
-// 	password = "FARHAN"
-// 	dbName   = "praktikum_mcs_bab7"
-// )
 
 func main() {
 	var PORT = ":" + os.Getenv("PORT")
@@ -43,13 +30,19 @@ func main() {
 
 	err = DB.Ping()
 	if err != nil {
-		log.Fatalf("Eror pinging DB : %v\n", err)
+		log.Fatalf("Error pinging DB : %v\n", err)
 	}
 
 	database.DBMigrate(DB)
 
 	defer DB.Close()
 
-	routers.StartServer().Run(PORT)
+	// Start server with CORS enabled
+	r := routers.StartServer()
+
+	// Adding CORS middleware with default settings
+	r.Use(cors.Default())
+
+	r.Run(PORT)
 	fmt.Println("berhasil konek...")
 }
