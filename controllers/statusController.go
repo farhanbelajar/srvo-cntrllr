@@ -43,7 +43,7 @@ func GetStatus(c *gin.Context) {
 
 func UpdateStatus(c *gin.Context) {
 	var status entities.Status
-	id, _ := strconv.Atoi(c.Param("id"))
+	id, _ := strconv.Atoi(c.Param("srv_status"))
 
 	// err := c.BindJSON(&status)
 	// if err != nil {

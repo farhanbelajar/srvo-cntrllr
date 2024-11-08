@@ -11,7 +11,7 @@ func StartServer() *gin.Engine {
 
 	router.POST("/servo/init-proj", controllers.InitProj)
 	router.GET("/servo/status", controllers.GetStatus)
-	router.PUT("/servo/:id", controllers.UpdateStatus)
+	router.PUT("/servo/update/:srv_status", controllers.UpdateStatus)
 
 	return router
 }
